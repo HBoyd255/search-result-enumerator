@@ -3,6 +3,9 @@
     "name": "Search Result Enumerator",
     "version": "1.0",
     "description": "Adds numbers to Google search results, allowing you to navigate them by pressing the corresponding key.",
+    "icons": {
+        "128": "icons/icon_1.png"
+    },
     "permissions": [
         "activeTab",
         "https://www.google.com/"
