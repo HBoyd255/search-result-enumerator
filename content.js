@@ -31,7 +31,7 @@ searchResultContainers.forEach((container, index) => {
   let pathToIcon = "icons/icon_" + key + ".png";
 
   // Set the icon's attributes.
-  icon.src = chrome.extension.getURL(pathToIcon); //TODO Change the icon
+  icon.src = chrome.extension.getURL(pathToIcon);
   icon.alt = "Icon";
 
   // Style the icon to match the text size
