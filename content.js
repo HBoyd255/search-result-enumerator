@@ -1,6 +1,4 @@
-// contentScript.js
-
-console.log("content.js loaded");
+// content.js
 
 // Select all search result links, based on the class name.
 let searchResultContainers = document.querySelectorAll(".MjjYud");
@@ -16,23 +14,21 @@ searchResultContainers = searchResultContainers.filter((container) => {
 // Limit the number of search result containers to 10.
 searchResultContainers = searchResultContainers.slice(0, 10);
 
-//TODO Remove this line
-console.log("searchResultContainers: ", searchResultContainers);
-
 // Loop through each search result container.
 searchResultContainers.forEach((container, index) => {
-  // Get the heading element.
-  let number = index + 1;
+  // Convert 0-based index to 1-based key.
+  let key = index + 1;
 
+  // The 10th key is 0.
   if (index == 9) {
-    number = 0;
+    key = 0;
   }
 
   // Create an icon element.
   let icon = document.createElement("img");
 
-  // Set the path to the icon, based on the number.
-  let pathToIcon = "icons/icon_" + number + ".png";
+  // Set the path to the icon, based on the key.
+  let pathToIcon = "icons/icon_" + key + ".png";
 
   // Set the icon's attributes.
   icon.src = chrome.extension.getURL(pathToIcon); //TODO Change the icon
@@ -50,3 +46,29 @@ searchResultContainers.forEach((container, index) => {
   // Prepend the icon to the heading element.
   Heading.prepend(icon);
 });
+
+function handleKeypress(event) {
+  // Get the key pressed as an integer.
+  let key = parseInt(event.key);
+
+  console.log("key: ", key);
+
+  // Convert 1-based key to 0-based index.
+  let index = key - 1;
+
+  // The 10th key is 0.
+  if (key == 0) {
+    index = 9;
+  }
+
+  let container = searchResultContainers[index];
+
+  // Get the link element.
+  let link = container.querySelector("a");
+
+  // Open the link in the current tab.
+  link.click();
+}
+
+// Listen for keypress events.
+document.addEventListener("keypress", handleKeypress);
