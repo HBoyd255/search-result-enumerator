@@ -41,17 +41,15 @@ searchResultContainers.forEach((container, index) => {
   icon.style.verticalAlign = "middle"; // Vertically align the icon with the text
 
   // Get the heading element.
-  Heading = container.querySelector("h3");
+  let heading = container.querySelector("h3");
 
   // Prepend the icon to the heading element.
-  Heading.prepend(icon);
+  heading.prepend(icon);
 });
 
 function handleKeypress(event) {
   // Get the key pressed as an integer.
   let key = parseInt(event.key);
-
-  console.log("key: ", key);
 
   // Convert 1-based key to 0-based index.
   let index = key - 1;
