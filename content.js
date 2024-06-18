@@ -11,6 +11,11 @@ searchResultContainers = searchResultContainers.filter((container) => {
   return container.querySelector("h3");
 });
 
+// Filter Google Image results by removing instances of the .EyBRub class.
+searchResultContainers = searchResultContainers.filter((container) => {
+  return !container.querySelector(".EyBRub");
+});
+
 // Limit the number of search result containers to 10.
 searchResultContainers = searchResultContainers.slice(0, 10);
 
@@ -34,11 +39,11 @@ searchResultContainers.forEach((container, index) => {
   icon.src = chrome.extension.getURL(pathToIcon);
   icon.alt = "Icon";
 
-  // Style the icon to match the text size
-  icon.style.width = "1.2em"; // Match the font size of the text
-  icon.style.height = "1.2em"; // Match the font size of the text
-  icon.style.marginRight = "10px"; // Add some space between the icon and the text
-  icon.style.verticalAlign = "middle"; // Vertically align the icon with the text
+  // Style the icon to match the text size, and add margin and vertical alignment.
+  icon.style.width = "1.2em";
+  icon.style.height = "1.2em";
+  icon.style.marginRight = "10px";
+  icon.style.verticalAlign = "middle";
 
   // Get the heading element.
   let heading = container.querySelector("h3");
