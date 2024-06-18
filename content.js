@@ -48,8 +48,20 @@ searchResultContainers.forEach((container, index) => {
 });
 
 function handleKeypress(event) {
+  let activeElement = document.activeElement.tagName.toLowerCase();
+
+  // Ignore any keypress if the user is typing in an input or textarea.
+  if (activeElement === "input" || activeElement === "textarea") {
+    return;
+  }
+
   // Get the key pressed as an integer.
   let key = parseInt(event.key);
+
+  // Ignore any keypress that is not a number.
+  if (isNaN(key)) {
+    return;
+  }
 
   // Convert 1-based key to 0-based index.
   let index = key - 1;
@@ -61,11 +73,13 @@ function handleKeypress(event) {
 
   let container = searchResultContainers[index];
 
-  // Get the link element.
-  let link = container.querySelector("a");
+  if (container) {
+    // Get the link element.
+    let link = container.querySelector("a");
 
-  // Open the link in the current tab.
-  link.click();
+    // Open the link in the current tab.
+    link.click();
+  }
 }
 
 // Listen for keypress events.
