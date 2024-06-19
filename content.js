@@ -1,8 +1,34 @@
 // content.js
 
-function addIcon(container, character, rightMargin) {
+// Create a dictionary to store the key and URL pairs.
+let shortcutKeys = {};
+
+// Function to open a URL based on a key and its corresponding URL.
+function fireShortcut(key) {
+  // Get the URL based on the key.
+  let url = shortcutKeys[key];
+
+  // If the URL exists, open it in the current tab.
+  if (url) {
+    window.location.href = url;
+  }
+}
+
+// Function to add a key and URL pair to the dictionary.
+function addShortcutKey(key, url) {
+  // If the key and URL exist, add the key and URL pair to the dictionary.
+  if (key && url) {
+    shortcutKeys[key] = url;
+  }
+}
+
+// Function to add an icon to a container element.
+function addIcon(container, key, rightMargin) {
   // Create an icon element.
   let icon = document.createElement("img");
+
+  // Convert the key to a lowercase string.
+  let character = key.toString().toLowerCase();
 
   // Set the path to the icon, based on the character.
   let pathToIcon = "icons/icon_" + character + ".png";
@@ -53,11 +79,22 @@ searchResultContainers.forEach((container, index) => {
   // Get the heading element.
   let heading = container.querySelector("h3");
 
-  // Add an icon within the heading element.
-  addIcon(heading, key, "10px");
+  // Get the a tag within the container.
+  let aTag = container.querySelector("a");
+
+  // Retrieve the URL from the a tag by getting the href attribute.
+  let url = aTag.getAttribute("href");
+
+  // If the URL exists, add the icon and store the key and URL pair.
+  if (url) {
+    addIcon(heading, key, "10px");
+    addShortcutKey(key, url);
+  }
 });
 
+// Function to handle keypress events.
 function handleKeypress(event) {
+  // Get the name of the active element.
   let activeElement = document.activeElement.tagName.toLowerCase();
 
   // Ignore any keypress if the user is typing in an input or textarea.
@@ -65,81 +102,81 @@ function handleKeypress(event) {
     return;
   }
 
-  // Get the key pressed as an integer.
-  let key = parseInt(event.key);
+  // Get the key that was pressed.
+  let key = event.key.toUpperCase();
 
-  // Ignore any keypress that is not a number.
-  if (isNaN(key)) {
-    return;
-  }
-
-  // Convert 1-based key to 0-based index.
-  let index = key - 1;
-
-  // The 10th key is 0.
-  if (key == 0) {
-    index = 9;
-  }
-
-  let container = searchResultContainers[index];
-
-  if (container) {
-    // Get the link element.
-    let link = container.querySelector("a");
-
-    // Open the link in the current tab.
-    link.click();
-  }
+  // Fire the shortcut based on the key.
+  fireShortcut(key);
 }
 
-// // Listen for keypress events.
-// document.addEventListener("keypress", handleKeypress);
-
 // Select all the a tags on the page.
-let searchTabContainers = document.querySelectorAll("a");
+let searchTabATags = document.querySelectorAll("a");
 
 // Convert the NodeList to an Array.
-searchTabContainers = Array.from(searchTabContainers);
+searchTabATags = Array.from(searchTabATags);
 
 // Filter out search tab containers that do not contain the YmvwI class.
-searchTabContainers = searchTabContainers.filter((container) => {
+searchTabATags = searchTabATags.filter((container) => {
   return container.querySelector(".YmvwI");
 });
 
-searchTabContainers.forEach((container) => {
-  // Get the div element.
-  let div = container.querySelector("div");
+searchTabATags.forEach((aTag) => {
+  // Get the div element inside the a tag.
+  let div = aTag.querySelector("div");
 
   // Get the inner text of the tab.
   let innerText = div.innerText.trim().toLowerCase();
 
+  // Get the URL from the tab by getting the href attribute.
+  let url = aTag.getAttribute("href");
+
+  // If the URL does not exist, return.
+  if (!url) {
+    return;
+  }
+
   // Add the Letter "A" icon to the All tab.
   if (innerText === "all") {
     addIcon(div, "A", "0px");
+    addShortcutKey("A", url);
   }
 
   // Add the Letter "I" icon to the Images tab.
   if (innerText === "images") {
     addIcon(div, "I", "0px");
+    addShortcutKey("I", url);
   }
 
   // Add the Letter "V" icon to the Videos tab.
   if (innerText === "videos") {
     addIcon(div, "V", "0px");
+    addShortcutKey("V", url);
   }
 
   // Add the Letter "N" icon to the News tab.
   if (innerText === "news") {
     addIcon(div, "N", "0px");
+    addShortcutKey("N", url);
   }
 
   // Add the Letter "P" icon to the Products tab.
   if (innerText === "products") {
     addIcon(div, "P", "0px");
+    addShortcutKey("P", url);
   }
 
   // Add the Letter "M" icon to the Maps tab.
   if (innerText === "maps") {
     addIcon(div, "M", "0px");
+    addShortcutKey("M", url);
+  }
+
+  // Add the Letter "M" icon to the Maps tab.
+  if (innerText === "books") {
+    addIcon(div, "B", "0px");
+    addShortcutKey("B", url);
   }
 });
+
+// Listen for keypress events.
+document.addEventListener("keypress", handleKeypress);

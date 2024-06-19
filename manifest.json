@@ -1,10 +1,10 @@
 {
     "manifest_version": 2,
-    "name": "Search Result Enumerator",
-    "version": "1.1",
-    "description": "Adds numbers to Google search results, allowing you to navigate them by pressing the corresponding key.",
+    "name": "Search Result Quick Navigator",
+    "version": "1.2",
+    "description": "Adds numbers to Google search results, and letters to the different search tabs, allowing you to navigate them by pressing the corresponding key.",
     "icons": {
-        "128": "icons/icon_1.png"
+        "128": "icons/logo.png"
     },
     "permissions": [
         "activeTab",
