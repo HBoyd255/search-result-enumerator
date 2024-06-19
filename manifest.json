@@ -1,15 +1,13 @@
 {
     "manifest_version": 2,
     "name": "Search Result Quick Navigator",
-    "version": "1.2",
+    "version": "1.2.1",
     "description": "Adds numbers to Google search results, and letters to the different search tabs, allowing you to navigate them by pressing the corresponding key.",
     "icons": {
-        "128": "icons/logo.png"
+        "128": "icons/logo128.png",
+        "96": "icons/logo96.png",
+        "48": "icons/logo48.png"
     },
-    "permissions": [
-        "activeTab",
-        "https://www.google.com/"
-    ],
     "content_scripts": [
         {
             "matches": [
