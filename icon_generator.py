@@ -1,5 +1,5 @@
 from PIL import ImageFont, ImageDraw, Image
-
+from string import ascii_lowercase
 
 ICON_SIZE = 128
 ICON_RADIUS = 20
@@ -77,3 +77,15 @@ for x in range(10):
 
     # Save the icon to the icons directory.
     icon.save(f"icons/icon_{x}.png")
+
+# Iterate over the lowercase letters and create an icon for each letter.
+for character in ascii_lowercase:
+
+    # Convert the character to uppercase.
+    character_upper = character.upper()
+
+    # Create the icon for the uppercase letter.
+    icon = create_icon(character_upper)
+
+    # Save the icon to the icons directory with the lowercase character.
+    icon.save(f"icons/icon_{character}.png")
