@@ -1,5 +1,26 @@
 // content.js
 
+function addIcon(container, character) {
+  // Create an icon element.
+  let icon = document.createElement("img");
+
+  // Set the path to the icon, based on the character.
+  let pathToIcon = "icons/icon_" + character + ".png";
+
+  // Set the icon's attributes.
+  icon.src = chrome.extension.getURL(pathToIcon);
+  icon.alt = "Icon";
+
+  // Style the icon to match the text size, and add margin and vertical alignment.
+  icon.style.width = "1.2em";
+  icon.style.height = "1.2em";
+  icon.style.marginRight = "10px";
+  icon.style.verticalAlign = "middle";
+
+  // Prepend the icon to the heading element.
+  container.prepend(icon);
+}
+
 // Select all search result links, based on the class name.
 let searchResultContainers = document.querySelectorAll(".MjjYud");
 
@@ -29,27 +50,11 @@ searchResultContainers.forEach((container, index) => {
     key = 0;
   }
 
-  // Create an icon element.
-  let icon = document.createElement("img");
-
-  // Set the path to the icon, based on the key.
-  let pathToIcon = "icons/icon_" + key + ".png";
-
-  // Set the icon's attributes.
-  icon.src = chrome.extension.getURL(pathToIcon);
-  icon.alt = "Icon";
-
-  // Style the icon to match the text size, and add margin and vertical alignment.
-  icon.style.width = "1.2em";
-  icon.style.height = "1.2em";
-  icon.style.marginRight = "10px";
-  icon.style.verticalAlign = "middle";
-
   // Get the heading element.
   let heading = container.querySelector("h3");
 
-  // Prepend the icon to the heading element.
-  heading.prepend(icon);
+  // Add an icon within the heading element.
+  addIcon(heading, key);
 });
 
 function handleKeypress(event) {
