@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Search Result Quick Navigator",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "Adds numbers to Google search results, and letters to the different search tabs, allowing you to navigate them by pressing the corresponding key.",
     "icons": {
         "128": "icons/logo128.png",
