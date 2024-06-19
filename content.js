@@ -1,6 +1,6 @@
 // content.js
 
-function addIcon(container, character) {
+function addIcon(container, character, rightMargin) {
   // Create an icon element.
   let icon = document.createElement("img");
 
@@ -14,7 +14,7 @@ function addIcon(container, character) {
   // Style the icon to match the text size, and add margin and vertical alignment.
   icon.style.width = "1.2em";
   icon.style.height = "1.2em";
-  icon.style.marginRight = "10px";
+  icon.style.marginRight = rightMargin;
   icon.style.verticalAlign = "middle";
 
   // Prepend the icon to the heading element.
@@ -54,7 +54,7 @@ searchResultContainers.forEach((container, index) => {
   let heading = container.querySelector("h3");
 
   // Add an icon within the heading element.
-  addIcon(heading, key);
+  addIcon(heading, key, "10px");
 });
 
 function handleKeypress(event) {
@@ -92,5 +92,54 @@ function handleKeypress(event) {
   }
 }
 
-// Listen for keypress events.
-document.addEventListener("keypress", handleKeypress);
+// // Listen for keypress events.
+// document.addEventListener("keypress", handleKeypress);
+
+// Select all the a tags on the page.
+let searchTabContainers = document.querySelectorAll("a");
+
+// Convert the NodeList to an Array.
+searchTabContainers = Array.from(searchTabContainers);
+
+// Filter out search tab containers that do not contain the YmvwI class.
+searchTabContainers = searchTabContainers.filter((container) => {
+  return container.querySelector(".YmvwI");
+});
+
+searchTabContainers.forEach((container) => {
+  // Get the div element.
+  let div = container.querySelector("div");
+
+  // Get the inner text of the tab.
+  let innerText = div.innerText.trim().toLowerCase();
+
+  // Add the Letter "A" icon to the All tab.
+  if (innerText === "all") {
+    addIcon(div, "A", "0px");
+  }
+
+  // Add the Letter "I" icon to the Images tab.
+  if (innerText === "images") {
+    addIcon(div, "I", "0px");
+  }
+
+  // Add the Letter "V" icon to the Videos tab.
+  if (innerText === "videos") {
+    addIcon(div, "V", "0px");
+  }
+
+  // Add the Letter "N" icon to the News tab.
+  if (innerText === "news") {
+    addIcon(div, "N", "0px");
+  }
+
+  // Add the Letter "P" icon to the Products tab.
+  if (innerText === "products") {
+    addIcon(div, "P", "0px");
+  }
+
+  // Add the Letter "M" icon to the Maps tab.
+  if (innerText === "maps") {
+    addIcon(div, "M", "0px");
+  }
+});
