@@ -1,11 +1,12 @@
 from PIL import ImageFont, ImageDraw, Image
-from string import ascii_lowercase
 
 ICON_SIZE = 128
 ICON_RADIUS = 20
 BACKGROUND_COLOUR = (22, 22, 22, 255)
 TEXT_COLOUR = (226, 225, 223, 255)
 ICON_FONT = "fonts/RobotoSlab-Bold.ttf"
+
+USED_CHARACTERS = ["a", "i", "v", "n", "p", "m", "b"]
 
 
 def create_icon(character: str) -> Image.Image:
@@ -78,8 +79,8 @@ for x in range(10):
     # Save the icon to the icons directory.
     icon.save(f"icons/icon_{x}.png")
 
-# Iterate over the lowercase letters and create an icon for each letter.
-for character in ascii_lowercase:
+# Iterate over the lowercase required characters and create an icon for each.
+for character in USED_CHARACTERS:
 
     # Convert the character to uppercase.
     character_upper = character.upper()
